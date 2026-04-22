@@ -6,18 +6,18 @@ package:
   version: "{{ version }}"
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 49291401cef1bea680499dd5e3b5906cfdfe52d65f6f396f6f6b90842ff70da8
 
 build:
-  number: 1
+  number: 2
   script: "{{ PYTHON }} -m pip install . -vv "
   noarch: python
 
 requirements:
   host:
     - pip
-    - python <3
+    - python {{ python_min }}
     - setuptools
   run:
     - beaker >=1.5.4
@@ -29,7 +29,7 @@ requirements:
     - paste >=1.7.5.1
     - pastedeploy >=1.5.0
     - pastescript >=1.7.4.2
-    - python <3
+    - python >={{ python_min }},<3
     - routes >=1.12.3
     - simplejson >=2.2.1
     - tempita >=0.5.1
@@ -53,6 +53,7 @@ test:
     - genshi
     - jinja2 >=2.2.1
     - nose
+    - python {{ python_min }}
 
 about:
   home: https://github.com/Pylons/pylons
